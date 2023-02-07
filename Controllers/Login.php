@@ -14,4 +14,9 @@
 			$data['page_functions_js'] = "functions_login.js";
 			$this->views->getView($this,"login",$data);
 		}
+
+		public function loginUser(){
+			dep($_POST);
+			die();
+		}
     }
