@@ -7,13 +7,12 @@ class Dashboard extends Controllers
         parent::__construct();
     }
 
-    public function dashboard($params)
+    public function dashboard()
     {
         $data['page_id'] = 2;
         $data['page_tag'] = "Dashboard - Amalancetilla";
-        $data['page_title'] = "Dashboard <small> Amalancetilla </small>";
-        $data['page_name'] = "dashboard";
-        //Manda llamar el archivo HOME de la carpeta Views
+        $data['page_title'] = "Dashboard - Amalancetilla";
+        $data['page_name'] = "dashboard";        
         $this->views->getView($this, "dashboard", $data);
     }
 }
