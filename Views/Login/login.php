@@ -54,7 +54,7 @@
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>¿Olvidaste contraseña?</h3>
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input id="txtEmailReset" name="txtEmailReset" class="form-control" type="text" placeholder="Ingrese la respuesta">
+                    <input id="txtEmailReset" name="txtEmailReset" class="form-control" type="email" placeholder="Ingrese la respuesta">
                 </div>
                 <div class="form-group btn-container">
                     <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>REINICIAR</button>

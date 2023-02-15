@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					if (request.status == 200) {
 						var objData = JSON.parse(request.responseText);
 						if (objData.status) {
-							window.location = base_url+'/dashboard';
+							window.location = base_url + '/dashboard';
 							//window.location.reload(false);
 						} else {
 							swal("Atención", objData.msg, "error");
@@ -36,11 +36,57 @@ document.addEventListener('DOMContentLoaded', function () {
 					} else {
 						swal("Atención", "Error en el proceso", "error");
 					}
-					
+
 					return false;
 				}
 			}
 		}
 	}
 
+	if (document.querySelector("#formRecetPass")) {
+		let formRecetPass = document.querySelector("#formRecetPass");
+		formRecetPass.onsubmit = function (e) {
+			e.preventDefault();
+
+			let strEmail = document.querySelector('#txtEmailReset').value;
+			if (strEmail == "") {
+				swal("Por favor", "Escribe tu correo electrónico.", "error");
+				return false;
+			} else {
+				var request = (window.XMLHttpRequest) ?
+					new XMLHttpRequest() :
+					new ActiveXObject('Microsoft.XMLHTTP');
+
+				var ajaxUrl = base_url + '/Login/resetPass';
+				var formData = new FormData(formRecetPass);
+				request.open("POST", ajaxUrl, true);
+				request.send(formData);
+				request.onreadystatechange = function () {
+					if (request.readyState != 4) return;
+					if (request.status == 200) {
+						var objData = JSON.parse(request.responseText);
+						if (objData.status) {
+							swal({
+								title: "",
+								text: objData.msg,
+								type: "success",
+								confirmButtonText: "Aceptar",
+								closeOnConfirm: false,
+							}, function (isConfirm) {
+								if (isConfirm) {
+									window.location = base_url;
+								}
+							});
+						} else {
+							swal("Atención", objData.msg, "error");
+						}
+					} else {
+						swal("Atención", "Error en el proceso", "error");
+					}
+					//divLoading.style.display = "none";
+					return false;
+				}
+			}
+		}
+	}
 }, false);

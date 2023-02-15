@@ -19,21 +19,22 @@ class LoginModel extends Mysql
 		$sql = "SELECT idpersona,status FROM persona WHERE 
 					email_user = '$this->strUsuario' and 
 					password = '$this->strPassword' and 
-					status != 0 ";		
+					status != 0 ";
 		$request = $this->select($sql);
 		return $request;
 	}
-	public function sessionLogin(int $iduser){
+	public function ssesionLogin(int $iduser)
+	{
 		$this->intIdUsuario = $iduser;
-		//BUSCAR ROLE 
+		//BUSCAR ROLES 
 		$sql = "SELECT p.idpersona,
-						p.identificacion,
+						p.indentificacion,
 						p.nombres,
 						p.apellidos,
 						p.telefono,
 						p.email_user,
-						p.nit,
-						p.nombrefiscal,
+						p.dni,
+						p.nombrefical,
 						p.direccionfiscal,
 						r.idrol,r.nombrerol,
 						p.status 
@@ -42,7 +43,24 @@ class LoginModel extends Mysql
 				ON p.rolid = r.idrol
 				WHERE p.idpersona = $this->intIdUsuario";
 		$request = $this->select($sql);
-		$_SESSION['userData'] = $request;
+		return $request;
+	}
+	public function getUserEmail(string $strEmail)
+	{
+		$this->strUsuario = $strEmail;
+		$sql = "SELECT idpersona,nombres,apellidos, status FROM persona WHERE 
+				email_user = '$this->strUsuario' and  
+				status = 1 ";
+		$request = $this->select($sql);
+		return $request;
+	}
+
+	public function setTokenUser(int $idpersona, string $token){
+		$this->intIdUsuario = $idpersona;
+		$this->strToken = $token;
+		$sql = "UPDATE persona SET token = ? WHERE idpersona = $this->intIdUsuario ";
+		$arrData = array($this->strToken);
+		$request = $this->update($sql,$arrData);
 		return $request;
 	}
 }
