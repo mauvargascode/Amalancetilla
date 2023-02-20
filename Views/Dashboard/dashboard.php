@@ -1,8 +1,8 @@
-    <?php headerAdmin($data); ?>
+<?php headerAdmin($data); ?>
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-dashboard"></i> <?= $data['page_title']?></h1>
+          <h1><i class="fa fa-dashboard"></i><?= $data['page_title'] ?></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -13,10 +13,9 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">Dashboard</div>
-            <?php dep($_SESSION['userData']); ?>            
           </div>
         </div>
       </div>
     </main>
-    <?php footerAdmin($data); ?>
+<?php footerAdmin($data); ?>
     

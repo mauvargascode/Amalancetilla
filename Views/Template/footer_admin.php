@@ -1,4 +1,4 @@
-<script>
+    <script>
         const base_url = "<?= base_url(); ?>";
     </script>
     <!-- Essential javascripts for application to work-->
@@ -26,4 +26,3 @@
     <script src="<?= media(); ?>/js/<?= $data['page_functions_js']; ?>"></script>
   </body>
 </html>
-    

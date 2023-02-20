@@ -1,6 +1,5 @@
 <?php 
-	//Convierte las letras iniciales de los controladores en mayusculas para que el navegador los encuentre
-	$controller = ucwords($controller); 
+	$controller = ucwords($controller);
 	$controllerFile = "Controllers/".$controller.".php";
 	if(file_exists($controllerFile))
 	{
