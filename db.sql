@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-02-2023 a las 20:40:57
+-- Tiempo de generación: 20-02-2023 a las 21:07:10
 -- Versión del servidor: 5.7.40
 -- Versión de PHP: 8.0.26
 
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `password`, `nit`, `nombrefiscal`, `direccionfiscal`, `token`, `rolid`, `datecreated`, `status`) VALUES
-(1, '24091989', 'Mauricio', 'Vargas', 24091989, 'mauriciovargastm@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CF', 'Abel Osh', 'Ciudad de Guatemala', 'ec0d6b4fabe61dfb1727-923cb03bbf2257964317-c7fe075e5678123d37a8-5819d6231b408984e502', 1, '2020-10-03 02:28:53', 1),
+(1, '24091989', 'Mauricio', 'Vargas', 24091989, 'mauriciovargastm@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CF', 'Mauricio', 'Ciudad Tegucigalpa', 'ec0d6b4fabe61dfb1727-923cb03bbf2257964317-c7fe075e5678123d37a8-5819d6231b408984e502', 1, '2020-10-03 02:28:53', 1),
 (2, '15932020', 'Carlos', 'Zambrano', 78451210, 'carlos@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 2, '2020-10-03 02:31:07', 1);
 
 -- --------------------------------------------------------
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `rol` (
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`idrol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -127,7 +127,8 @@ CREATE TABLE IF NOT EXISTS `rol` (
 
 INSERT INTO `rol` (`idrol`, `nombrerol`, `descripcion`, `status`) VALUES
 (1, 'Administrador', 'Acceso a todo el sistema 	', 1),
-(2, 'Supervisores', 'Supervisores', 1);
+(2, 'Supervisores', 'Supervisores', 1),
+(3, 'Prueba', 'Prueba', 1);
 
 --
 -- Restricciones para tablas volcadas
