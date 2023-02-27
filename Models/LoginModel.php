@@ -12,17 +12,37 @@
 			parent::__construct();
 		}	
 
-		public function loginUser(string $usuario, string $password)
-		{
-			$this->strUsuario = $usuario;
-			$this->strPassword = $password;
-			$sql = "SELECT idpersona,status FROM persona WHERE 
-					email_user = '$this->strUsuario' and 
-					password = '$this->strPassword' and 
-					status != 0 ";
-			$request = $this->select($sql);
-			return $request;
-		}
+		public function login_User(string $usuario, string $password)
+{
+    $this->strUsuario = $usuario;
+    $this->strPassword = $password;
+
+    // Aquí se comprueba si el usuario ha superado el límite de intentos fallidos
+    if (isset($_SESSION['numIntentos']) && $_SESSION['numIntentos'] >= 3) {
+        return array();
+    }
+
+    $sql = "SELECT idpersona,status FROM persona WHERE 
+            email_user = '$this->strUsuario' and 
+            password = '$this->strPassword' and 
+            status != 0 ";
+    $request = $this->select($sql);
+
+    // Si el usuario no existe o la contraseña es incorrecta, se aumenta el número de intentos fallidos
+    if (empty($request)) {
+        if (!isset($_SESSION['numIntentos'])) {
+            $_SESSION['numIntentos'] = 1;
+        } else {
+            $_SESSION['numIntentos']++;
+        }
+    } else {
+        // Si el usuario ha iniciado sesión correctamente, se reinicia el contador de intentos fallidos
+        $_SESSION['numIntentos'] = 0;
+    }
+
+    return $request;
+}
+
 
 		public function sessionLogin(int $iduser){
 			$this->intIdUsuario = $iduser;
