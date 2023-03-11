@@ -20,7 +20,7 @@ class Login extends Controllers
 		$this->views->getView($this, "login", $data);
 	}
 
-	/*public function loginUser()
+	public function loginUser()
 	{
 		//dep($_POST);
 		if ($_POST) {
@@ -35,7 +35,7 @@ class Login extends Controllers
 				} else {
 					$arrData = $requestUser;
 					if ($arrData['status'] == 1) {
-						$_SESSION['idUser'] = $arrData['idpersona'];
+						$_SESSION['idUser'] = $arrData['id_usuario'];
 						$_SESSION['login'] = true;
 
 						$arrData = $this->model->sessionLogin($_SESSION['idUser']);
@@ -49,56 +49,7 @@ class Login extends Controllers
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 		}
 		die();
-	}*/
-
-	public function loginUser()
-{
-    if ($_POST) {
-        if (empty($_POST['txtEmail']) || empty($_POST['txtPassword'])) {
-            $arrResponse = array('status' => false, 'msg' => 'Error de datos');
-        } else {
-            $strUsuario = strtolower(strClean($_POST['txtEmail']));
-            $strPassword = hash("SHA256", $_POST['txtPassword']);
-
-            // Aquí se comprueba si el usuario ha superado el límite de intentos fallidos
-            if (isset($_SESSION['numIntentos']) && $_SESSION['numIntentos'] >= 3) {
-                $arrResponse = array('status' => false, 'msg' => 'El usuario ha sido bloqueado. Por favor, póngase en contacto con el administrador.');
-            } else {
-                $requestUser = $this->model->login_User($strUsuario, $strPassword);
-                if (empty($requestUser)) {
-                    // Si las credenciales son incorrectas, se incrementa la variable de sesión numIntentos
-                    if (!isset($_SESSION['numIntentos'])) {
-                        $_SESSION['numIntentos'] = 1;
-                    } else {
-                        $_SESSION['numIntentos']++;
-                    }
-                    $arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecto.');
-                } else {
-                    $arrData = $requestUser;
-                    if ($arrData['status'] == 1) {
-                        $_SESSION['idUser'] = $arrData['idpersona'];
-                        $_SESSION['login'] = true;
-
-                        $arrData = $this->model->sessionLogin($_SESSION['idUser']);
-                        sessionUser($_SESSION['idUser']);
-
-                        // Si el usuario ha iniciado sesión correctamente, se restablece la variable de sesión numIntentos
-                        if (isset($_SESSION['numIntentos'])) {
-                            unset($_SESSION['numIntentos']);
-                        }
-                        $arrResponse = array('status' => true, 'msg' => 'ok');
-                    } else {
-                        $arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
-                    }
-                }
-            }
-        }
-        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
-    }
-    die();
-}
-
-
+	}
 	public function resetPass()
 	{
 		if ($_POST) {

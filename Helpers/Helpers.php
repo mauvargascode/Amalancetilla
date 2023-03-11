@@ -1,4 +1,6 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 	//Retorla la url del proyecto
 	function base_url()
@@ -34,12 +36,37 @@
         require_once $view_modal;        
     }
     //Envio de correos
+    /*function sendEmail($data,$template)
+    {
+        $asunto = $data['asunto'];
+        $emailDestino = $data['email'];
+        $empresa = NOMBRE_REMITENTE;
+        $remitente = EMAIL_REMITENTE;
+    
+        require ("Helpers/PHPMailer/PHPMailer.php");
+        require ("Helpers/PHPMailer/Exception.php");
+        require ("Helpers/PHPMailer/SMTP.php");
+    
+        $mailer = new PHPMailer();
+        $mailer->setFrom($empresa, "$remitente");
+        ob_start();
+        require_once("Views/Template/Email/".$template.".php");
+        $mensaje = ob_get_clean(); 
+        $mailer->addAddress($emailDestino);
+        $mailer->Subject = $mensaje;
+        $mailer->AltBody = strip_tags($mensaje);
+        $mailer->send();
+        return $mailer;     
+    }*/
+    
+
     function sendEmail($data,$template)
     {
         $asunto = $data['asunto'];
         $emailDestino = $data['email'];
         $empresa = NOMBRE_REMITENTE;
         $remitente = EMAIL_REMITENTE;
+
         //ENVIO DE CORREO
         $de = "MIME-Version: 1.0\r\n";
         $de .= "Content-type: text/html; charset=UTF-8\r\n";
@@ -54,7 +81,7 @@
     function getPermisos(int $idmodulo){
         require_once ("Models/PermisosModel.php");
         $objPermisos = new PermisosModel();
-        $idrol = $_SESSION['userData']['idrol'];
+        $idrol = $_SESSION['userData']['id_rol'];
         $arrPermisos = $objPermisos->permisosModulo($idrol);
         $permisos = '';
         $permisosMod = '';

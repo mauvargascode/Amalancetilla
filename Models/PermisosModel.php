@@ -52,21 +52,21 @@
 
 		public function permisosModulo(int $idrol){
 			$this->intRolid = $idrol;
-			$sql = "SELECT p.rolid,
-						   p.moduloid,
-						   m.titulo as modulo,
-						   p.r,
-						   p.w,
-						   p.u,
-						   p.d 
-					FROM permisos p 
-					INNER JOIN modulo m
-					ON p.moduloid = m.idmodulo
-					WHERE p.rolid = $this->intRolid";
+			$sql = "SELECT p.id_rol,
+						   p.idobjeto,
+						   m.objeto as tbl_objetos ,
+						   p.permiso_consultar,
+						   p.permiso_insercion,
+						   p.permiso_actualizacion,
+						   p.permiso_eliminacion 
+					FROM tbl_permisos p 
+					INNER JOIN tbl_objetos m
+					ON p.idobjeto = m.id_objeto
+					WHERE p.id_rol = $this->intRolid";
 			$request = $this->select_all($sql);
 			$arrPermisos = array();
 			for ($i=0; $i < count($request); $i++) { 
-				$arrPermisos[$request[$i]['moduloid']] = $request[$i];
+				$arrPermisos[$request[$i]['idobjeto']] = $request[$i];
 			}
 			return $arrPermisos;
 		}

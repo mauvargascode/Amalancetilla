@@ -3,12 +3,12 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?= media();?>/images/avatar.png" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name"><?= $_SESSION['userData']['nombres']; ?></p>
-          <p class="app-sidebar__user-designation"><?= $_SESSION['userData']['nombrerol']; ?></p>
+          <p class="app-sidebar__user-name"><?= $_SESSION['userData']['nombre_usuario']; ?></p>
+          <p class="app-sidebar__user-designation"><?= $_SESSION['userData']['rol']; ?></p>
         </div>
       </div>
       <ul class="app-menu">
-        <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
+        <?php if(!empty($_SESSION['tbl_permisos'][1]['r'])){ ?>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/dashboard">
                 <i class="app-menu__icon fa fa-dashboard"></i>
@@ -16,7 +16,7 @@
             </a>
         </li>
         <?php } ?>
-        <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>-->
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>

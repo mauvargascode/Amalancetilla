@@ -22,9 +22,9 @@
         <h1><?= $data['page_title']; ?></h1>
       </div>
       <div class="login-box">
-        <div id="divLoading" >
+        <div id="" >
           <div>
-            <img src="<?= media(); ?>/images/loading.svg" alt="Loading">
+            <!--<img src="<?= media(); ?>/images/loading.svg" alt="Loading">-->
           </div>
         </div>
         <form class="login-form" name="formLogin" id="formLogin" action="">

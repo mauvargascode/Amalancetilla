@@ -13,55 +13,33 @@
 		}	
 
 		public function login_User(string $usuario, string $password)
-{
-    $this->strUsuario = $usuario;
-    $this->strPassword = $password;
-
-    // Aquí se comprueba si el usuario ha superado el límite de intentos fallidos
-    if (isset($_SESSION['numIntentos']) && $_SESSION['numIntentos'] >= 3) {
-        return array();
-    }
-
-    $sql = "SELECT idpersona,status FROM persona WHERE 
-            email_user = '$this->strUsuario' and 
-            password = '$this->strPassword' and 
-            status != 0 ";
-    $request = $this->select($sql);
-
-    // Si el usuario no existe o la contraseña es incorrecta, se aumenta el número de intentos fallidos
-    if (empty($request)) {
-        if (!isset($_SESSION['numIntentos'])) {
-            $_SESSION['numIntentos'] = 1;
-        } else {
-            $_SESSION['numIntentos']++;
-        }
-    } else {
-        // Si el usuario ha iniciado sesión correctamente, se reinicia el contador de intentos fallidos
-        $_SESSION['numIntentos'] = 0;
-    }
-
-    return $request;
-}
+		{
+			$this->strUsuario = $usuario;
+			$this->strPassword = $password;
+			$sql = "SELECT id_usuario,status FROM tbl_usuario WHERE 
+					correo = '$this->strUsuario' and 
+					contrasena = '$this->strPassword' and 
+					status != 0 ";
+			$request = $this->select($sql);
+			return $request;
+		}
 
 
 		public function sessionLogin(int $iduser){
 			$this->intIdUsuario = $iduser;
 			//BUSCAR ROLE 
-			$sql = "SELECT p.idpersona,
-							p.identificacion,
-							p.nombres,
-							p.apellidos,
+			$sql = "SELECT p.id_usuario,
+							p.usuario,
+							p.nombre_usuario,
 							p.telefono,
-							p.email_user,
-							p.nit,
-							p.nombrefiscal,
-							p.direccionfiscal,
-							r.idrol,r.nombrerol,
+							p.estado_usuario,							
+							p.correo,
+							r.id_rol,r.rol,
 							p.status 
-					FROM persona p
-					INNER JOIN rol r
-					ON p.rolid = r.idrol
-					WHERE p.idpersona = $this->intIdUsuario";
+					FROM tbl_usuario p
+					INNER JOIN tbl_roles r
+					ON p.id_rol = r.id_rol
+					WHERE p.id_usuario = $this->intIdUsuario";
 			$request = $this->select($sql);
 			$_SESSION['userData'] = $request;
 			return $request;
