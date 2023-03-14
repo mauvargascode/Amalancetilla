@@ -40,24 +40,37 @@ class Roles extends Controllers
             } else {
                 $arrData[$i]['estado_rol'] = '<span class="badge badge-danger">Inactivo</span>';
             }
-           
+
             $arrData[$i]['options'] = '<div class="text-center"> 
-            <button class="btn btn-secondary btn-sm btnPermisosRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Permisos">Permisos</button>
-            <button class="btn btn-primary btn-sm btnEditRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Editar">Editar</button>
-            <button class="btn btn-danger btn-sm btnDelRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Elimar">Eliminar</button>
+            <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['Id_Rol'] . '" title="Permisos">Permisos</button>
+            <button class="btn btn-primary btn-sm btnEditRol" rl="' . $arrData[$i]['Id_Rol'] . '" title="Editar">Editar</button>
+            <button class="btn btn-danger btn-sm btnDelRol" rl="' . $arrData[$i]['Id_Rol'] . '" title="Elimar">Eliminar</button>
             </div>';
-           
-            
-            
-            
-            
-
-
-
-            
         }
 
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function setRol()
+    {
+        $intIdrol = intval($_POST['idRol']);
+        $strRol =  strClean($_POST['txtNombre']);
+        $strDescipcion = strClean($_POST['txtDescripcion']);
+        $intStatus = intval($_POST['listStatus']);
+
+        $request_rol = $this->model->insertRol($strRol, $strDescipcion, $intStatus);
+
+        if ($request_rol > 0) 
+        {
+            $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+        } else if ($request_rol == 'exist'){
+
+            $arrResponse = array('status' => false, 'msg' => '¡Atención! El Rol ya existe.');
+        } else {
+            $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+        }
+        echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         die();
     }
 }
