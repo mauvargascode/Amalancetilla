@@ -11,7 +11,6 @@ class Conexion{
 		}catch(PDOException $e){
 			$this->conect = 'Error de conexión';
 		    echo "ERROR: " . $e->getMessage();
-			  //echo " error conexión";
 		}
 	}
 

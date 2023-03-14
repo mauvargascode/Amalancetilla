@@ -1,7 +1,7 @@
 <?php 
 	
-	//define("BASE_URL", "http://localhost/tienda_virtual/");
-	const BASE_URL = 'http://localhost/amalancetilla/';
+	define("BASE_URL", "http://localhost/amalancetilla/");
+	//const BASE_URL = "https://abelosh.com/tienda_virtual/";
 
 	//Zona horaria
 	date_default_timezone_set('America/Tegucigalpa');
@@ -11,7 +11,7 @@
 	const DB_NAME = "amalancetilla_bd";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
-	const DB_CHARSET = "utf8";
+	const DB_CHARSET = "charset=utf8";
 
 	//Deliminadores decimal y millar Ej. 24,1989.00
 	const SPD = ".";
@@ -19,20 +19,3 @@
 
 	//Simbolo de moneda
 	const SMONEY = "L";
-
-	//MODULOS
-	CONST MUSUARIOS =2 ;
-
-	//Datos envio de correo
-	const NOMBRE_REMITENTE = "Amalancetilla";
-	const EMAIL_REMITENTE = "no-reply@amalancetilla.com";
-	const NOMBRE_EMPESA = "Amalancetilla";
-	const WEB_EMPRESA = "www.amalancetilla.com";
-	
-
-
-
-	
-
-
- ?>
