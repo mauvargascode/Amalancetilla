@@ -8,7 +8,7 @@
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "amalancetilla";
+	const DB_NAME = "amalancetilla_bd";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
@@ -19,6 +19,9 @@
 
 	//Simbolo de moneda
 	const SMONEY = "L";
+
+	//MODULOS
+	CONST MUSUARIOS =2 ;
 
 	//Datos envio de correo
 	const NOMBRE_REMITENTE = "Amalancetilla";

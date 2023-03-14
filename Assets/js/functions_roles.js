@@ -1,5 +1,6 @@
+
 var tableRoles;
-var divLoading = document.querySelector("#divLoading");
+
 document.addEventListener('DOMContentLoaded', function(){
 
 	tableRoles = $('#tableRoles').dataTable( {
@@ -13,12 +14,13 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"idrol"},
-            {"data":"nombrerol"},
-            {"data":"descripcion"},
-            {"data":"status"},
+            {"data":"Id_Rol"},
+            {"data":"Nombre_Rol"},
+            {"data":"Descripcion_Rol"},
+            {"data":"estado_rol"},
             {"data":"options"}
         ],
+
         "resonsieve":"true",
         "bDestroy": true,
         "iDisplayLength": 10,
@@ -39,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function(){
             swal("Atención", "Todos los campos son obligatorios." , "error");
             return false;
         }
-        divLoading.style.display = "flex";
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         var ajaxUrl = base_url+'/Roles/setRol'; 
         var formData = new FormData(formRol);
@@ -59,8 +60,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     swal("Error", objData.msg , "error");
                 }              
             } 
-            divLoading.style.display = "none";
-            return false;
         }
 
         
@@ -105,11 +104,11 @@ function fntEditRol(idrol){
             var objData = JSON.parse(request.responseText);
             if(objData.status)
             {
-                document.querySelector("#idRol").value = objData.data.idrol;
-                document.querySelector("#txtNombre").value = objData.data.nombrerol;
-                document.querySelector("#txtDescripcion").value = objData.data.descripcion;
+                document.querySelector("#idRol").value = objData.data.Id_Rol;
+                document.querySelector("#txtNombre").value = objData.data.Nombre_Rol;
+                document.querySelector("#txtDescripcion").value = objData.data.Descripcion_Rol;
 
-                if(objData.data.status == 1)
+                if(objData.data.estado_rol == 1)
                 {
                     var optionSelect = '<option value="1" selected class="notBlock">Activo</option>';
                 }else{
@@ -156,11 +155,8 @@ function fntDelRol(idrol){
                     if(objData.status)
                     {
                         swal("Eliminar!", objData.msg , "success");
-                        tableRoles.api().ajax.reload(function(){
-                            fntEditRol();
-                            fntDelRol();
-                            fntPermisos();
-                        });
+                   
+                        tableRoles.api().ajax.reload();
                     }else{
                         swal("Atención!", objData.msg , "error");
                     }

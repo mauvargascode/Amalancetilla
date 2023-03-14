@@ -35,7 +35,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">CONTRASEÑA</label>
-            <input id="txtPassword" name="txtPassword" class="form-control" type="password" placeholder="Contraseña">
+            <input id="txtPasswordl" name="txtPasswordl" class="form-control" type="password" placeholder="Contraseña">
           </div>
           <div class="form-group">
             <div class="utility">

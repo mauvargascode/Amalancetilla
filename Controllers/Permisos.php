@@ -15,29 +15,41 @@
 				$arrPermisosRol = $this->model->selectPermisosRol($rolid);
 				$arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
 				$arrPermisoRol = array('idrol' => $rolid );
+						//	while (count($arrPermisosRol) < count($arrModulos)){
+			//insertar en tabla permisos, mandar el id del rol,mandar el objeto
+			//seleccionar id_objeto de la tabla permisos donde idrol = idrol
 
+						//	}
+
+				
 				if(empty($arrPermisosRol))
 				{
+				
 					for ($i=0; $i < count($arrModulos) ; $i++) { 
 
 						$arrModulos[$i]['permisos'] = $arrPermisos;
+					
+
 					}
 				}else{
 					for ($i=0; $i < count($arrModulos); $i++) {
-						$arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
-						if(isset($arrPermisosRol[$i])){
-							$arrPermisos = array('r' => $arrPermisosRol[$i]['r'], 
-												 'w' => $arrPermisosRol[$i]['w'], 
-												 'u' => $arrPermisosRol[$i]['u'], 
-												 'd' => $arrPermisosRol[$i]['d'] 
-												);
+						
+
+						$arrPermisos = array('r' => $arrPermisosRol[$i]['Permiso_Get'], 
+						'w' => $arrPermisosRol[$i]['Permiso_Insert'], 
+						'u' => $arrPermisosRol[$i]['Permiso_Update'], 
+						'd' => $arrPermisosRol[$i]['Permiso_Delete'] 
+					   );
+						if($arrModulos[$i]['Id_Objeto'] == $arrPermisosRol[$i]['Id_Objeto'])
+						{
+							$arrModulos[$i]['permisos'] = $arrPermisos;
 						}
-						$arrModulos[$i]['permisos'] = $arrPermisos;
+					
 					}
 				}
 				$arrPermisoRol['modulos'] = $arrModulos;
 				$html = getModal("modalPermisos",$arrPermisoRol);
-				//dep($arrPermisoRol);
+	
 
 			}
 			die();

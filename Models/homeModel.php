@@ -1,10 +1,11 @@
 <?php 
 
-	class HomeModel extends Mysql
+	class homeModel extends Mysql
 	{
 		public function __construct()
 		{
 			parent::__construct();
 		}	
+		
 	}
  ?>
